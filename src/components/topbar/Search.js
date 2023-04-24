@@ -1,6 +1,6 @@
 import { InputBase, IconButton } from "@mui/material";
- import SearchIcon  from "@mui/icons-material/Search"
-export default Search =  () => {
+import SearchIcon from "@mui/icons-material/Search";
+const Search = () => {
   return (
     <>
       <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
@@ -10,3 +10,5 @@ export default Search =  () => {
     </>
   );
 };
+
+export default Search;
