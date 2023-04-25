@@ -21,3 +21,5 @@ const Header = ({ title, subTitle }) => {
     </Box>
   );
 };
+
+export default Header;
