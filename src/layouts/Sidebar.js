@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-
-import "react-pro-sidebar/dist/css/styles.css";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
+import { Box, Typography, useTheme } from "@mui/material";
+// import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -18,44 +17,57 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import Menuitem from "../components/topbar/Menuitem";
 
-export default Sidebar = () => {
+const SideBar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+
   const [selected, setSelected] = useState("Dashboard");
+  const {
+    collapseSidebar,
+    toggleSidebar,
+    collapsed,
+    toggled,
+    broken,
+    rtl,
+    sidebarClasses,
+  } = useProSidebar();
+
   return (
     <Box
-      Box
       sx={{
-        "&.pro-sidebar-inner": {
-          background: `${colors.primary[400]}  !importan`,
+        position: "sticky",
+        display: "flex",
+        top: 0,
+        bottom: 0,
+        zIndex: 10000,
+        height: "100vh",
+        "& .ps-menu-icon": {
+          padding: "10px 10px 5px 10px !important",
         },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
+        "& .ps-menu-label": {
+          padding: "10px 2px 5px 15px !important",
         },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
-        "& .pro-inner-item:hover": {
+        "& .ps-menu-button:hover": {
           color: "#868dfb !important",
         },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+        "& .ps-menu-label.ps-active": {
+          color: `${colors.greenAccent[500]} !important`,
+          backgroundColor: "transparent !important",
         },
       }}
     >
-      <Sidebar collapsed={isCollapsed}>
+      <Sidebar breakPoint="md" backgroundColor={colors.primary[400]}>
         <Menu>
           {/* Logo and menu icon */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={!isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            onClick={() => collapseSidebar()}
+            icon={<MenuOutlinedIcon />}
             style={{
               margin: "10px 0 20px 0",
-              color: colors.grey[100],
+              color: colors.primary[100],
             }}
           >
-            {!isCollapsed && (
+            {!collapsed && (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -65,38 +77,36 @@ export default Sidebar = () => {
                 <Typography variant="h3" color={colors.grey[300]}>
                   Admin
                 </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
               </Box>
             )}
           </MenuItem>
-            {!isCollapsed && (
-              <Box mb="25px">
-                <Box display="flex"  justifyContent="center" alignItems="center">
+          {!collapsed && (
+            <Box mb="25px">
+              <Box display="flex" justifyContent="center" alignItems="center">
                 <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }} />
-                </Box>
-                <Box textAlign="center">
+                  src={`./assets/worash.jpg`}
+                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                />
+              </Box>
+              <Box textAlign="center">
                 <Typography
                   variant="h2"
                   color={colors.grey[100]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Ed Roh
+                  Worash
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                  Full-Stack Developer
                 </Typography>
               </Box>
-              </Box>
-            )}
-    <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            </Box>
+          )}
+          <Box paddingLeft={collapsed ? undefined : "10%"}>
             <Menuitem
               title="Dashboard"
               to="/"
@@ -204,3 +214,5 @@ export default Sidebar = () => {
     </Box>
   );
 };
+
+export default SideBar;
