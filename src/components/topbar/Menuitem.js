@@ -4,20 +4,22 @@ import { MenuItem } from "react-pro-sidebar";
 import { Typography } from "@mui/material";
 import { tokens } from "../../theme";
 
-export default Menuitem = ({ title, to, icon, selected, setSelected }) => {
+const Menuitem = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
     <MenuItem
       active={selected === title}
       style={{
-        color: colors.grey[100],
+        color: colors.primary[100],
       }}
       onClick={() => setSelected(title)}
       icon={icon}
+      component={<Link to={to} />}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
     </MenuItem>
   );
 };
+
+export default Menuitem;
