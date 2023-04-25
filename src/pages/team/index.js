@@ -1,4 +1,4 @@
-import { Box, Icon, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -79,7 +79,7 @@ const Team = () => {
 
       <Box
         m="40px 0 0 0"
-        height="90vh"
+        // height="100vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
